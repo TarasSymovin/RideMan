@@ -26,6 +26,14 @@ public class Client {
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Trip> trips;
 
+    public List<Trip> getTrips() {
+        return trips;
+    }
+
+    public void setTrips(List<Trip> trips) {
+        this.trips = trips;
+    }
+
     public String getClientPhone() {
         return clientPhone;
     }

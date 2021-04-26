@@ -38,6 +38,14 @@ public class Department {
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Employee> employees;
 
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
+
     public List<Driver> getDrivers() {
         return drivers;
     }

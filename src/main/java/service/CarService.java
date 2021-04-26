@@ -16,7 +16,12 @@ import java.util.List;
 public class CarService extends SessionUtil implements CarDAO {
     @Override
     public void add(Car car) {
+        openTransactionSession();
 
+        Session session = getSession();
+        session.save(car);
+
+        closeTransactionSession();
     }
 
     @Override
@@ -34,6 +39,20 @@ public class CarService extends SessionUtil implements CarDAO {
             TypedQuery<Car> allQuery = session.createQuery(all);
 
             return allQuery.getResultList();
+        }
+        finally {
+            closeTransactionSession();
+        }
+    }
+
+    @Override
+    public Car getByCarNumber(String number) {
+        openTransactionSession();
+
+        try {
+            Session session = getSession();
+
+            return session.get(Car.class, number);
         }
         finally {
             closeTransactionSession();

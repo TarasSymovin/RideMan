@@ -38,6 +38,22 @@ public class City {
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Route> arrivalCities;
 
+    public List<Route> getDepartureCities() {
+        return departureCities;
+    }
+
+    public void setDepartureCities(List<Route> departureCities) {
+        this.departureCities = departureCities;
+    }
+
+    public List<Route> getArrivalCities() {
+        return arrivalCities;
+    }
+
+    public void setArrivalCities(List<Route> arrivalCities) {
+        this.arrivalCities = arrivalCities;
+    }
+
     public List<Department> getDepartments() {
         return departments;
     }

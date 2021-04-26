@@ -5,7 +5,9 @@ import entity.Car;
 import java.util.List;
 
 public interface CarDAO {
-    public void add(Car car);
+    void add(Car car);
 
-    public List<Car> getAllCars();
+    List<Car> getAllCars();
+
+    Car getByCarNumber(String number);
 }

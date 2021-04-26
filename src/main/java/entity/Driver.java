@@ -30,7 +30,7 @@ public class Driver {
     private BigDecimal driverSalary;
 
     @Column(name = "DriverBankCard")
-    private long driverBankCard;
+    private String driverBankCard;
 
     @ManyToOne()
     @JoinColumn(name = "Departament")
@@ -39,6 +39,14 @@ public class Driver {
     @OneToMany(mappedBy = "driver", fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     private List<Trip> trips;
+
+    public List<Trip> getTrips() {
+        return trips;
+    }
+
+    public void setTrips(List<Trip> trips) {
+        this.trips = trips;
+    }
 
     public String getDriverLicense() {
         return driverLicense;
@@ -88,11 +96,11 @@ public class Driver {
         this.driverSalary = driverSalary;
     }
 
-    public long getDriverBankCard() {
+    public String getDriverBankCard() {
         return driverBankCard;
     }
 
-    public void setDriverBankCard(long driverBankCard) {
+    public void setDriverBankCard(String driverBankCard) {
         this.driverBankCard = driverBankCard;
     }
 
