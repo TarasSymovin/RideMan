@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="rus">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../../../Program Files/Microsoft JDBC DRIVER 9.2 for SQL Server/rus" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../../../../Program Files/Microsoft JDBC DRIVER 9.2 for SQL Server/rus/samples/adaptive" />
+      <root url="file://$PROJECT_DIR$/../../../../Program Files/Microsoft JDBC DRIVER 9.2 for SQL Server/rus/samples/alwaysencrypted" />
+      <root url="file://$PROJECT_DIR$/../../../../Program Files/Microsoft JDBC DRIVER 9.2 for SQL Server/rus/samples/azureactivedirectoryauthentication" />
+      <root url="file://$PROJECT_DIR$/../../../../Program Files/Microsoft JDBC DRIVER 9.2 for SQL Server/rus/samples/connections" />
+      <root url="file://$PROJECT_DIR$/../../../../Program Files/Microsoft JDBC DRIVER 9.2 for SQL Server/rus/samples/constrained" />
+      <root url="file://$PROJECT_DIR$/../../../../Program Files/Microsoft JDBC DRIVER 9.2 for SQL Server/rus/samples/dataclassification" />
+      <root url="file://$PROJECT_DIR$/../../../../Program Files/Microsoft JDBC DRIVER 9.2 for SQL Server/rus/samples/datatypes" />
+      <root url="file://$PROJECT_DIR$/../../../../Program Files/Microsoft JDBC DRIVER 9.2 for SQL Server/rus/samples/resultsets" />
+      <root url="file://$PROJECT_DIR$/../../../../Program Files/Microsoft JDBC DRIVER 9.2 for SQL Server/rus/samples/sparse" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/../../../../Program Files/Microsoft JDBC DRIVER 9.2 for SQL Server/rus" recursive="false" />
+  </library>
+</component>
