@@ -10,7 +10,7 @@ public class Employee {
     @Column(name = "EmployeeLogin")
     private String employeeLogin;
 
-    @Column(name = "EmployePassword")
+    @Column(name = "EmployeePassword")
     private String employeePassword;
 
     @Column(name = "EmployeeName")
@@ -29,7 +29,7 @@ public class Employee {
     private BigDecimal employeeSalary;
 
     @Column(name = "EmployeeBankCard")
-    private long employeeBankCard;
+    private String employeeBankCard;
 
     @ManyToOne()
     @JoinColumn(name = "EmployeeType")
@@ -95,11 +95,11 @@ public class Employee {
         this.employeeSalary = employeeSalary;
     }
 
-    public long getEmployeeBankCard() {
+    public String getEmployeeBankCard() {
         return employeeBankCard;
     }
 
-    public void setEmployeeBankCard(long employeeBankCard) {
+    public void setEmployeeBankCard(String employeeBankCard) {
         this.employeeBankCard = employeeBankCard;
     }
 
