@@ -14,10 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import service.CityService;
-import service.ClientService;
-import service.RouteService;
-import service.TripService;
+import service.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -92,6 +89,9 @@ public class OperatorController {
     private Tab routeTab;
 
     @FXML
+    private Tab tripCreateTab;
+
+    @FXML
     private TabPane tabPane;
 
     @FXML
@@ -121,11 +121,21 @@ public class OperatorController {
     @FXML
     private JFXComboBox<Car> carCombo;
 
+    @FXML
+    private JFXTextField countOfSeatsField;
+
+    Client client;
+    Route route;
     private final ObservableList<Trip> trips = FXCollections.observableArrayList();
+    private final DriverService driverService = new DriverService();
     private final TripService tripService = new TripService();
     private final ClientService clientService = new ClientService();
     private final CityService cityService = new CityService();
     private final RouteService routeService = new RouteService();
+    private final CarService carService = new CarService();
+
+    private List<Driver> drivers = driverService.getAllDrivers();
+    private List<Car> cars = carService.getAllCars();
 
     @FXML
     void initialize() {
@@ -207,7 +217,7 @@ public class OperatorController {
 
     @FXML
     void addClient(MouseEvent event) {
-        Client client = new Client();
+        client = new Client();
         client.setClientPhone(clientPhoneField.getText());
         client.setClientName(clientNameField.getText());
         client.setClientSurname(clientSurnameField.getText());
@@ -253,14 +263,65 @@ public class OperatorController {
                 localDateArrival.getDayOfMonth(), localTimeArrival.getHour(),
                 localTimeArrival.getMinute(), localTimeArrival.getSecond());
 
-        Route route = new Route();
+        route = new Route();
         route.setCityOfArrival(cityService.getByCity(cityOfDepartureField.getText()));
         route.setCityOfDeparture(cityService.getByCity(cityOfArrivalField.getText()));
         route.setTimeOfDeparture(dateOfDeparture);
         route.setTimeOfArrival(dateOfArrival);
         route.setDistance(Integer.parseInt(tripDistanceField.getText()));
 
+        ObservableList<Driver> freeDrivers = FXCollections.observableArrayList(drivers.stream().filter(x ->
+                x.getDepartment().getDepartmentId() ==
+                        LoginController.user.value.getDepartment().getDepartmentId())
+                .collect(Collectors.toList()));
+
+        for (Driver driver : drivers){
+            for (Trip trip : driver.getTrips()){
+                if (dateOfArrival.after(trip.getRoute().getTimeOfDeparture()) ||
+                        dateOfDeparture.before(trip.getRoute().getTimeOfArrival())){
+                    freeDrivers.remove(driver);
+                }
+            }
+        }
+
+        ObservableList<Car> freeCars = FXCollections.observableArrayList(cars.stream().filter(x ->
+                x.getGarage().getDepartment().getDepartmentId() ==
+                        LoginController.user.value.getDepartment().getDepartmentId() &&
+                        Integer.parseInt(countOfSeatsField.getText()) < x.getNumberOfSeats())
+                .collect(Collectors.toList()));
+
+        for (Car car : cars){
+            for (Trip trip : car.getTrips()){
+                if (dateOfArrival.after(trip.getRoute().getTimeOfDeparture()) ||
+                        dateOfDeparture.before(trip.getRoute().getTimeOfArrival())){
+                    freeCars.remove(car);
+                }
+            }
+        }
+
+        carCombo.setItems(freeCars);
+        driverCombo.setItems(freeDrivers);
+
         routeService.add(route);
+        tabPane.getSelectionModel().select(tripCreateTab);
+    }
+
+    @FXML
+    void addTrip(MouseEvent event) {
+        Driver driver = driverCombo.getSelectionModel().getSelectedItem();
+        Car car = carCombo.getSelectionModel().getSelectedItem();
+
+        Trip trip = new Trip();
+        trip.setCar(car);
+        trip.setDriver(driver);
+        trip.setClient(client);
+        trip.setRoute(route);
+        trip.setCost(BigDecimal.valueOf(route.getDistance() / 100 * car.getFuelConsumption() * 30 * 1.5));
+        trip.setPrice(trip.getCost().multiply(BigDecimal.valueOf(2)));
+
+        tripService.add(trip);
+        trips.add(trip);
+        tripsTable.getItems().add(trip);
     }
 }
 
