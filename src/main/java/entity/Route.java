@@ -5,6 +5,8 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -75,5 +77,11 @@ public class Route {
 
     public void setCityOfArrival(City cityOfArrival) {
         this.cityOfArrival = cityOfArrival;
+    }
+
+    @Override
+    public String toString() {
+        return cityOfDeparture.getCity() + " - " + cityOfArrival.getCity()
+                + " " + timeOfDeparture.toString() + " - " + timeOfArrival.toString();
     }
 }

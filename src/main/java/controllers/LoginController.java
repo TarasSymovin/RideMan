@@ -27,7 +27,6 @@ public class LoginController {
         EmployeeService employeeService = new EmployeeService();
         Employee employee = employeeService.getEmployeeByLoginAndPass(loginField.getText(), passwordField.getText());
 
-
         if (employee == null) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Помилка входу!!!");
@@ -41,6 +40,11 @@ public class LoginController {
             switch (employee.getEmployeeType().getEmployeeType()) {
                 case "Менеджер": {
                     tab = new TabUtil("view/manager_scene.fxml", "Менеджер");
+                    tab.openNewTab();
+                    break;
+                }
+                case "Оператор": {
+                    tab = new TabUtil("view/operator_scene.fxml", "Оператор");
                     tab.openNewTab();
                     break;
                 }

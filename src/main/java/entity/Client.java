@@ -5,6 +5,7 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Client")
@@ -64,5 +65,23 @@ public class Client {
 
     public void setClientEmail(String clientEmail) {
         this.clientEmail = clientEmail;
+    }
+
+    @Override
+    public String toString() {
+        return clientName + ": " + clientPhone;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Client client = (Client) o;
+        return Objects.equals(clientPhone, client.clientPhone) && Objects.equals(clientName, client.clientName) && Objects.equals(clientSurname, client.clientSurname) && Objects.equals(clientEmail, client.clientEmail) && Objects.equals(trips, client.trips);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(clientPhone, clientName, clientSurname, clientEmail, trips);
     }
 }

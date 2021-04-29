@@ -1,7 +1,11 @@
 package dao;
 
 import entity.City;
+import entity.Driver;
+
+import java.util.List;
 
 public interface CityDAO {
-    public City getCityById(int id);
+    City getCityById(int id);
+    public City getByCity(String city);
 }

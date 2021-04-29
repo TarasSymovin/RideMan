@@ -28,7 +28,7 @@ public class TabUtil {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setOpacity(1);
         stage.setTitle(title);
-        stage.setScene(new Scene(root, 1000, 600));
+        stage.setScene(new Scene(root, 1150, 600));
         stage.showAndWait();
     }
 }

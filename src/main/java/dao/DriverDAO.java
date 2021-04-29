@@ -10,4 +10,5 @@ public interface DriverDAO {
     List<Driver> getAllDrivers();
     void remove(Driver driver);
     void update(Driver driver);
+    Driver findById(String licence);
 }

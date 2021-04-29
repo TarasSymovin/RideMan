@@ -30,4 +30,14 @@ public class ClientService extends SessionUtil implements ClientDAO {
             closeTransactionSession();
         }
     }
+
+    @Override
+    public void update(Client client) {
+        openTransactionSession();
+
+        Session session = getSession();
+        session.update(client);
+
+        closeTransactionSession();
+    }
 }

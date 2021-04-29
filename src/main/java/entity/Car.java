@@ -89,4 +89,9 @@ public class Car {
     public void setGarage(Garage garage) {
         this.garage = garage;
     }
+
+    @Override
+    public String toString() {
+        return carNumber + ": " + carModel;
+    }
 }

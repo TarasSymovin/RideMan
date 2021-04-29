@@ -4,6 +4,7 @@ import bl.SessionUtil;
 import dao.DriverDAO;
 import entity.Car;
 import entity.Driver;
+import entity.Employee;
 import org.hibernate.Session;
 
 import javax.persistence.TypedQuery;
@@ -64,5 +65,16 @@ public class DriverService extends SessionUtil implements DriverDAO {
         closeTransactionSession();
     }
 
+    @Override
+    public Driver findById(String licence) {
+        openTransactionSession();
 
+        try {
+            Session session = getSession();
+            return session.get(Driver.class, licence);
+        }
+        finally {
+            closeTransactionSession();
+        }
+    }
 }
